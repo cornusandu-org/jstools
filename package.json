@@ -1,7 +1,7 @@
 {
   "name": "@the_glitch_master/jstools",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "Javascript Utilities",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
