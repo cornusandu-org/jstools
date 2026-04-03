@@ -1,6 +1,7 @@
 export type * from "../internal-types";
 import { AsyncLocalStorage } from "async_hooks";
 import { RuntimeAsyncDeadlockError, RuntimeError } from "../errors/index.js";
+import type { Empty } from "../internal-types";
 
 export async function delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -83,6 +84,21 @@ export class AsyncLock {
             p();
         }
         return null;
+    }
+
+    with<T>(fn: () => Promise<T>): Promise<Empty | Error | T> {
+        return (async (): Promise<Empty | Error | T> => {
+            await this.acquire();
+            try {
+                const v: T = await fn();
+                this.release();
+                return v as T;
+            } catch (err) {
+                this.release();
+                if (err instanceof Error) return err;
+                return new Error(String(err));
+            }
+        })();
     }
 }
 

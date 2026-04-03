@@ -1,8 +1,5 @@
-import { AsyncLock } from "jstools/async";
+import { int, octal } from '@the_glitch_master/jstools/types';
 
-const lock = await AsyncLock.new("myLock", false);
+const h = int.toOctal(14, true);
 
-await lock.acquire();
-await lock.acquire();
-lock.release();
-lock.release();
+console.log(h);

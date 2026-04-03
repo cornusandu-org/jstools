@@ -1,6 +1,23 @@
 # jstools
 ## jstools/async
 ### AsyncLock
+A mutex designed to allow safe concurrent access of shared values.
+
+**Example**
+
+```js
+const lock = await AsyncLock.new("myLock");
+
+await lock.acquire();
+// do work
+lock.release();
+
+const v = await lock.with(async () => {
+    // do work
+});
+if (v instanceof Error) throw v;
+```
+
 #### AsyncLock.new
 **Description**
 
@@ -60,6 +77,26 @@ release(): void {};
 }
 ```
 
+#### AsyncLock.with
+**Description**
+
+Acquire the lock, run a block of code, release the lock and return the value returned by the block of code (if any), or an error (if any error was thrown).
+
+**Type**
+
+```js
+class AsyncLock {
+with(fn: () => Promise<Empty>): Promise<Empty | Error | any> {};
+}
+```
+
+
+### getAsyncContextId
+Get a unique identifier for the current async context.
+
+Takes no arguments, returns a number.
+
+
 ## jstools/errors
 | Error | Description |
 | ----- | ----------- |
@@ -71,6 +108,8 @@ release(): void {};
 | RuntimeAsyncDeadlockError | Runtime async-related potential deadlocks |
 | TypeConversionError | Error during type conversions |
 | LogicError | Failed assertion or unexpected value |
+
+These errors are not specific to this library, so feel free to use them yourself!
 
 ## jstools/types
 
@@ -94,6 +133,17 @@ release(): void {};
 >
 > Description:
 > > Safely convert a number to a hex string (correctly handles inf/nan values and undefined values)
+
+> `int.toOctal()`
+>
+> Arguments:
+> * `n: number?`
+> * `signed: boolean = false` (whether to not convert to an unsigned integer)
+>
+> Returns: `OctalString | "0oinf" | "-0oinf" | "NaN"`
+>
+> Description:
+> > Safely convert a number to an octal string (correctly handles inf/nan values and undefined values)
 
 > `hex.toInt()`
 >
@@ -123,3 +173,32 @@ release(): void {};
 >
 > Description:
 > > Converts the raw contents of a hex string into an ordinary string
+
+> `octal.toInt()`
+>
+> Arguments:
+> * `h: HexString?`
+>
+> Returns: `number`
+> Description:
+> > Safely convert an octal string into a number
+
+> `octal.toIntAsString()`
+>
+> Arguments:
+> * `h: HexString?`
+>
+> Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
+>
+> Description:
+> > Convert an octal string into an integer and then into a string
+
+> `octal.asString()`
+>
+> Arguments:
+> * `h: HexString?`
+>
+> Returns: `string | "(undefined)"`
+>
+> Description:
+> > Converts the raw contents of an octal string into an ordinary string
