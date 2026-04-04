@@ -9,13 +9,13 @@ A mutex designed to allow safe concurrent access of shared values.
 const lock = await AsyncLock.new("myLock");
 
 await lock.acquire();
-// do work
+doWork();
 lock.release();
 
 const v = await lock.with(async () => {
-    // do work
+    await doWork();
 });
-if (v instanceof Error) throw v;
+if (v instanceof Error) throw v;  // Check for thrown errors
 ```
 
 #### AsyncLock.new
@@ -112,93 +112,91 @@ Takes no arguments, returns a number.
 These errors are not specific to this library, so feel free to use them yourself!
 
 ## jstools/types
+`int.toString()`
 
-> `int.toString()`
->
-> Arguments:
-> * `n: number?`
->
-> Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
->
-> Description:
-> > Safely convert a number to a string (correctly handles inf/nan values and undefined values)
+Arguments:
+* `n: number?`
 
-> `int.toHex()`
->
-> Arguments:
-> * `n: number?`
-> * `signed: boolean = false` (whether to not convert to an unsigned integer)
->
-> Returns: `HexString | "0xinf" | "-0xinf" | "NaN"`
->
-> Description:
-> > Safely convert a number to a hex string (correctly handles inf/nan values and undefined values)
+Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
 
-> `int.toOctal()`
->
-> Arguments:
-> * `n: number?`
-> * `signed: boolean = false` (whether to not convert to an unsigned integer)
->
-> Returns: `OctalString | "0oinf" | "-0oinf" | "NaN"`
->
-> Description:
-> > Safely convert a number to an octal string (correctly handles inf/nan values and undefined values)
+Description: Safely convert a number to a string (correctly handles inf/nan values and undefined values)
+<br><br><br>
 
-> `hex.toInt()`
->
-> Arguments:
-> * `h: HexString?`
->
-> Returns: `number`
-> Description:
-> > Safely convert a hex string into a number
+`int.toHex()`
 
-> `hex.toIntAsString()`
->
-> Arguments:
-> * `h: HexString?`
->
-> Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
->
-> Description:
-> > Convert a hex string into an integer and then into a string
+Arguments:
+* `n: number?`
+* `signed: boolean = false` (whether to not convert to an unsigned integer)
 
-> `hex.asString()`
->
-> Arguments:
-> * `h: HexString?`
->
-> Returns: `string | "(undefined)"`
->
-> Description:
-> > Converts the raw contents of a hex string into an ordinary string
+Returns: `HexString | "0xinf" | "-0xinf" | "NaN"`
 
-> `octal.toInt()`
->
-> Arguments:
-> * `h: HexString?`
->
-> Returns: `number`
-> Description:
-> > Safely convert an octal string into a number
+Description: Safely convert a number to a hex string (correctly handles inf/nan values and undefined values)
+<br><br><br>
 
-> `octal.toIntAsString()`
->
-> Arguments:
-> * `h: HexString?`
->
-> Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
->
-> Description:
-> > Convert an octal string into an integer and then into a string
+`int.toOctal()`
 
-> `octal.asString()`
->
-> Arguments:
-> * `h: HexString?`
->
-> Returns: `string | "(undefined)"`
->
-> Description:
-> > Converts the raw contents of an octal string into an ordinary string
+Arguments:
+* `n: number?`
+* `signed: boolean = false` (whether to not convert to an unsigned integer)
+
+Returns: `OctalString | "0oinf" | "-0oinf" | "NaN"`
+
+Description: Safely convert a number to an octal string (correctly handles inf/nan values and undefined values)
+<br><br><br>
+
+`hex.toInt()`
+
+Arguments:
+* `h: HexString?`
+
+Returns: `number`
+Description: Safely convert a hex string into a number
+<br><br><br>
+
+`hex.toIntAsString()`
+
+Arguments:
+* `h: HexString?`
+
+Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
+
+Description: Convert a hex string into an integer and then into a string
+<br><br><br>
+
+`hex.asString()`
+
+Arguments:
+* `h: HexString?`
+
+Returns: `string | "(undefined)"`
+
+Description: Converts the raw contents of a hex string into an ordinary string
+<br><br><br>
+
+`octal.toInt()`
+
+Arguments:
+* `h: HexString?`
+
+Returns: `number`
+Description: Safely convert an octal string into a number
+<br><br><br>
+
+`octal.toIntAsString()`
+
+Arguments:
+* `h: HexString?`
+
+Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
+
+Description: Convert an octal string into an integer and then into a string
+<br><br><br>
+
+`octal.asString()`
+
+Arguments:
+* `h: HexString?`
+
+Returns: `string | "(undefined)"`
+
+Description: Converts the raw contents of an octal string into an ordinary string
