@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "lint": "node ./lint/index.cjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest --watch"
   },
   "author": "",
   "license": "MIT",
@@ -15,7 +17,8 @@
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.6"
   },
   "type": "module",
   "exports": {
@@ -30,6 +33,9 @@
     },
     "./errors": {
       "import": "./dist/errors/index.js"
+    },
+    "./string/transform": {
+      "import": "./dist/string/transform.index.js"
     }
   }
 }
