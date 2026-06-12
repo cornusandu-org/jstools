@@ -1,6 +1,6 @@
 {
   "name": "@the_glitch_master/jstools",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Javascript Utilities",
   "main": "index.js",
   "scripts": {
