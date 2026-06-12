@@ -97,6 +97,66 @@ Get a unique identifier for the current async context.
 Takes no arguments, returns a number.
 
 
+## jstools/string
+
+### jstools/string/transform
+
+> **prefix.removePrefix**
+>
+> ```ts
+> let stringTransform.prefix.removePrefix: (str: string, prefix: string) => string = ...;
+> ```
+> 
+> If the string `str` starts with the prefix `prefix`, the string will be returned without the prefix. Otherwise, the string will be returned unchanged.
+
+> **prefix.removePrefixUnsafe**
+>
+> ```ts
+> let stringTransform.prefix.removePrefixUnsafe: (str: string, prefix: string) => string = ...;
+> ```
+> 
+> If the string `str` starts with the prefix `prefix`, the string will be returned without the prefix. Otherwise, the string will be sliced anyways, as if the prefix were present.
+
+> **prefix.hasPrefix**
+>
+> ```ts
+> let stringTransform.prefix.hasPrefix: (str: string, prefix: string) => boolean = ...;
+> ```
+> 
+> If the string `str` starts with the prefix `prefix`, the function will return `true`. Otherwise, `false` will be returned.
+
+> **suffix.removeSuffix**
+>
+> ```ts
+> let stringTransform.suffix.removeSuffix: (str: string, suffix: string) => string = ...;
+> ```
+> 
+> If the string `str` starts with the suffix `suffix`, the string will be returned without the suffix. Otherwise, the string will be returned unchanged.
+
+> **suffix.removeSuffixUnsafe**
+>
+> ```ts
+> let stringTransform.suffix.removeSuffixUnsafe: (str: string, suffix: string) => string = ...;
+> ```
+> 
+> If the string `str` starts with the prefix `suffix`, the string will be returned without the suffix. Otherwise, the string will be sliced anyways, as if the suffix were present.
+
+> **suffix.hasSuffix**
+>
+> ```ts
+> let stringTransform.suffix.hasSuffix: (str: string, suffix: string) => boolean = ...;
+> ```
+> 
+> If the string `str` starts with the suffix `suffix`, the function will return `true`. Otherwise, `false` will be returned.
+
+> **strcmp**
+>
+> ```ts
+> let stringTransform.strcmp: (a: string, b: string) => boolean = ...;
+> ```
+> 
+> Compares `a` and `b` the same way as the standard C `strcmp()` does. If `a > b`, return -1. If `a < b`, return 1. If `a = b`, return 0.
+
 ## jstools/errors
 | Error | Description |
 | ----- | ----------- |
