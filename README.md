@@ -31,7 +31,7 @@ const lock = await AsyncLock.new("myLockName");
 | Argument | Type | Description |
 | -------- | ---- | ----------- |
 | name     | string | The name for the lock (used for error contents) |
-| disallowReentry? | boolean (=false) | Whether the same async context can acquire the lock multiple times |
+| disallowReentry? | boolean (=false) | Whether the same async context can acquire the lock multiple times (tracked with AsyncLocalStorage) |
 
 **Type**
 
@@ -123,7 +123,7 @@ Takes no arguments, returns a number.
 > let stringTransform.prefix.hasPrefix: (str: string, prefix: string) => boolean = ...;
 > ```
 > 
-> If the string `str` starts with the prefix `prefix`, the function will return `true`. Otherwise, `false` will be returned.
+> If the string `str` ends with the prefix `prefix`, the function will return `true`. Otherwise, `false` will be returned.
 
 > **suffix.removeSuffix**
 >
@@ -131,7 +131,7 @@ Takes no arguments, returns a number.
 > let stringTransform.suffix.removeSuffix: (str: string, suffix: string) => string = ...;
 > ```
 > 
-> If the string `str` starts with the suffix `suffix`, the string will be returned without the suffix. Otherwise, the string will be returned unchanged.
+> If the string `str` ends with the suffix `suffix`, the string will be returned without the suffix. Otherwise, the string will be returned unchanged.
 
 > **suffix.removeSuffixUnsafe**
 >
@@ -139,7 +139,7 @@ Takes no arguments, returns a number.
 > let stringTransform.suffix.removeSuffixUnsafe: (str: string, suffix: string) => string = ...;
 > ```
 > 
-> If the string `str` starts with the prefix `suffix`, the string will be returned without the suffix. Otherwise, the string will be sliced anyways, as if the suffix were present.
+> If the string `str` ends with the suffix `suffix`, the string will be returned without the suffix. Otherwise, the string will be sliced anyways, as if the suffix were present.
 
 > **suffix.hasSuffix**
 >
@@ -152,10 +152,10 @@ Takes no arguments, returns a number.
 > **strcmp**
 >
 > ```ts
-> let stringTransform.strcmp: (a: string, b: string) => boolean = ...;
+> let stringTransform.strcmp: (a: string, b: string) => number = ...;
 > ```
 > 
-> Compares `a` and `b` the same way as the standard C `strcmp()` does. If `a > b`, return -1. If `a < b`, return 1. If `a = b`, return 0.
+> Compares `a` and `b` the same way as the standard C `strcmp()` does, though return values differ. If `a > b`, return -1. If `a < b`, return 1. If `a = b`, return 0.
 
 ## jstools/errors
 | Error | Description |
@@ -236,7 +236,7 @@ Description: Converts the raw contents of a hex string into an ordinary string
 `octal.toInt()`
 
 Arguments:
-* `h: HexString?`
+* `h: OctalString?`
 
 Returns: `number`
 Description: Safely convert an octal string into a number
@@ -245,7 +245,7 @@ Description: Safely convert an octal string into a number
 `octal.toIntAsString()`
 
 Arguments:
-* `h: HexString?`
+* `h: OctalString?`
 
 Returns: `string | "(undefined)" | "(math.inf)" | "-(math.inf)" | "NaN"`
 
@@ -255,7 +255,7 @@ Description: Convert an octal string into an integer and then into a string
 `octal.asString()`
 
 Arguments:
-* `h: HexString?`
+* `h: OctalString?`
 
 Returns: `string | "(undefined)"`
 
